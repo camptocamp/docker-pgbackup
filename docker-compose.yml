@@ -1,0 +1,25 @@
+version: "2"
+
+services:
+  master:
+    container_name: master
+    image: camptocamp/postgresql:9.5
+    ports:
+      - 5432:5432
+    environment:
+      - TZ=Europe/Zurich
+  pgbackup:
+    container_name: pgbackup
+    image: pgbackup
+    links:
+      - master
+    environment:
+      - PG_HOST=master
+      - PG_PORT=5432
+      - PG_USER=replicator
+      - PG_PASSWORD=replicator
+      - AWS_ACCESS_KEY_ID=XXX
+      - AWS_SECRET_ACCESS_KEY=XXX
+      - AWS_BUCKETNAME=pghoard
+      - AWS_DEFAULT_REGION=eu-west-1
+      - TZ=Europe/Zurich
