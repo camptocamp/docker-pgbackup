@@ -4,6 +4,8 @@ services:
   master:
     container_name: master
     image: camptocamp/postgresql:9.5
+    volumes:
+      - data:/var/lib/postgresql/data
     ports:
       - 5432:5432
     environment:
@@ -13,6 +15,8 @@ services:
     image: pgbackup
     links:
       - master
+    volumes:
+      - data:/home/postgres/master
     environment:
       - PG_HOST=master
       - PG_PORT=5432
@@ -23,3 +27,6 @@ services:
       - AWS_BUCKETNAME=pghoard
       - AWS_DEFAULT_REGION=eu-west-1
       - TZ=Europe/Zurich
+
+volumes:
+  data: {}

@@ -13,7 +13,7 @@ Before starting the test scenario below, you have to:
 
 2. replace the XXX values in the file `docker-compose.yml` with valid AWS access keys
 
-## Test scenario
+## Test scenario to understand how it works
  
 1. first of all, run the following command:
 
@@ -57,3 +57,31 @@ Before starting the test scenario below, you have to:
         aws s3 rm s3://pghoard/${HOSTNAME}/xlog/000000010000000000000003
         pg_ctl -D restore stop
         kill -CONT $(pgrep pg_receivexlog)
+
+## Restoring the master database cluster
+
+As you can see in the file [docker-compose.yml](docker-compose.yml), the
+PostgreSQL data cluster is available in both containers. This way, it's pretty
+easy to restore your master to a certain PITR.
+
+Once the composition is up and running, you can simply:
+
+        docker exec -it pgbackup bash
+        ...
+        pghoard_restore get-basebackup --config pghoard.json --site $HOSTNAME --target-dir restore --restore-to-master --recovery-target-xid 635
+        pg_ctl -D restore start
+        pg_ctl -D restore stop
+
+From another terminal, stop your current master with:
+
+        docker-compose stop master
+
+Go back inside your `pgbackup` container and
+
+        rsync -av --delete restore/ master/
+
+And finally restart your PostgreSQL master service:
+
+        docker-compose start master
+
+That's it!

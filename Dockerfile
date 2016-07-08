@@ -10,6 +10,7 @@ RUN apt-get update \
      make \
      libffi-dev \
      curl \
+     rsync \
      libsnappy-dev \
      python3-setuptools \
      python3-dev \
@@ -27,8 +28,8 @@ RUN curl -L -o /usr/local/bin/confd https://github.com/kelseyhightower/confd/rel
 RUN mkdir -p /etc/confd/{conf.d,templates}
 COPY conf.d /etc/confd/conf.d
 COPY templates /etc/confd/templates
-
-RUN mkdir -p /home/postgres/restore && chown postgres /home/postgres
+ 
+RUN mkdir -p /home/postgres/restore && chown -R postgres /home/postgres
 COPY /docker-entrypoint.sh /
 USER postgres
 WORKDIR /home/postgres
