@@ -39,7 +39,7 @@ Before starting the test scenario below, you have to:
         cp 000000010000000000000003.partial 000000010000000000000003
         cd
         pghoard_restore list-basebackups --config pghoard.json --site $HOSTNAME
-        get-basebackup --config pghoard.json --site $HOSTNAME --target-dir restore --restore-to-master
+        pghoard_restore get-basebackup --config pghoard.json --site $HOSTNAME --target-dir restore --restore-to-master
         pg_ctl -D restore start
         psql -l
 
@@ -47,7 +47,7 @@ Before starting the test scenario below, you have to:
 
         pg_ctl -D restore stop
         rm -fR restore
-        get-basebackup --config pghoard.json --site $HOSTNAME --target-dir restore --restore-to-master --recovery-target-xid 635
+        pghoard_restore get-basebackup --config pghoard.json --site $HOSTNAME --target-dir restore --restore-to-master --recovery-target-xid 635
         pg_ctl -D restore start
         psql -l
 
