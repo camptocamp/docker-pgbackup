@@ -22,8 +22,8 @@ services:
       - PG_PORT=5432
       - PG_USER=replicator
       - PG_PASSWORD=replicator
-      - AWS_ACCESS_KEY_ID=XXX
-      - AWS_SECRET_ACCESS_KEY=XXX
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
       - AWS_BUCKETNAME=pghoard
       - AWS_DEFAULT_REGION=eu-west-1
       - TZ=Europe/Zurich

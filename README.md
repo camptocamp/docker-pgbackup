@@ -7,11 +7,12 @@ This proof of concept is based on the following softwares:
 
 Before starting the test scenario below, you have to:
 
-1. build the pgbackup container
+1. Create a `.env` file containing your AWS variables:
 
-        docker build -t pgbackup .
-
-2. replace the XXX values in the file `docker-compose.yml` with valid AWS access keys
+```
+AWS_ACCESS_KEY_ID=XXXX
+AWS_SECRET_ACCESS_KEY=XXXX
+```
 
 ## Test scenario to understand how it works
  
