@@ -1,3 +1,5 @@
+# WARNING: This Proof of concept is obsolete, please see: https://github.com/camptocamp/rancher-template-postgres-cluster and https://github.com/camptocamp/docker-pghoard for current implementation
+
 # PostgreSQL Incremental Backup (POC)
 
 This proof of concept is based on the following softwares:
